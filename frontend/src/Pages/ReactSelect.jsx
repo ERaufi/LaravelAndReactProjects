@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import axios from 'axios';
 
-const DynamicSelect = () => {
+export default function DynamicSelect() {
     const [inputValue, setInputValue] = useState('');
     const [options, setOptions] = useState([]);
     const [page, setPage] = useState(1);
@@ -55,20 +55,23 @@ const DynamicSelect = () => {
     }, []);
 
     return (
-        <div>
-            <p>Select Or Search for A Country</p>
-            <Select
-                inputValue={inputValue}
-                onInputChange={handleInputChange}
-                options={options.map(option => ({ label: option.name, value: option.id }))}
-                isLoading={loading}
-                onMenuScrollToBottom={loadMoreOptions}  // Infinite scroll trigger
-                isClearable
-                placeholder="Search and select an option"
-            />
+        <div className="card ">
+            <div className="card-header">
+                <h2>Select Or Search for A Country</h2>
+            </div>
+            <div className="card-body">
+                <div className='form-control'>
+                    <Select
+                        inputValue={inputValue}
+                        onInputChange={handleInputChange}
+                        options={options.map(option => ({ label: option.name, value: option.id }))}
+                        isLoading={loading}
+                        onMenuScrollToBottom={loadMoreOptions}  // Infinite scroll trigger
+                        isClearable
+                        placeholder="Search and select an option"
+                    />
+                </div>
+            </div>
         </div>
-
     );
 };
-
-export default DynamicSelect;

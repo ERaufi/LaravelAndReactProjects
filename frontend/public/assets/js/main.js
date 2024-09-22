@@ -55,4 +55,4 @@ setTimeout(() => {
     overlay.classList.remove("active");
     mainWrapper.classList.remove("active");
   });
-}, 50);
+}, 500);
