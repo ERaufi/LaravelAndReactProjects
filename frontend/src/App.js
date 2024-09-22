@@ -3,7 +3,7 @@ import './App.css';
 import DynamicSelect from '../src/Pages/ReactSelect';
 import Sidebar from './Layout/Sidebar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import IntroJs from './Pages/IntroJs';
+import JoyrideDemo from './Pages/Joyride';
 
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
         <Sidebar />
         <Routes>
           <Route path="/react-select" element={<DynamicSelect />} />
-          <Route path="/intro-js" element={<IntroJs />} />
+          <Route path="/intro-js" element={<JoyrideDemo />} />
         </Routes>
       </Router>
     </div>
