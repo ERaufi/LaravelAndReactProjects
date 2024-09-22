@@ -2,14 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import Joyride from 'react-joyride';
 
-
-// Official Link https://react-joyride.com/
 const JoyrideDemo = () => {
-    const [run, setRun] = useState(false);
+    const [isJoyrideActive, setIsJoyrideActive] = useState(false);
 
     const steps = [
         {
-            target: '#card1',
+            target: '#notification',
             content: 'This is Card 1!',
         },
         {
@@ -35,8 +33,24 @@ const JoyrideDemo = () => {
     ];
 
     useEffect(() => {
-        setRun(true); // Start the tour when the component mounts
+        // Check if the tour has already been completed (or started) in localStorage
+        const tourCompleted = localStorage.getItem('joyrideCompleted');
+
+        if (!tourCompleted) {
+            // Start Joyride if not already completed
+            setIsJoyrideActive(true);
+        }
     }, []);
+
+    const handleJoyrideCallback = (data) => {
+        const { status } = data;
+
+        if (status === 'finished' || status === 'skipped') {
+            // Mark the tour as completed in localStorage when finished or skipped
+            localStorage.setItem('joyrideCompleted', true);
+            setIsJoyrideActive(false); // Disable Joyride after completion
+        }
+    };
 
     return (
         <div>
@@ -64,24 +78,15 @@ const JoyrideDemo = () => {
                         </div>
                     </div>
                 </div>
-
             </div>
-            <Joyride
-                steps={steps}
-                run={run}
-                continuous={true}
-                showProgress={true}
-                showSkipButton={true}
-                styles={{
-                    options: {
-                        arrowColor: '#e3ffeb',
-                        backgroundColor: '#e3ffeb',
-                        overlayColor: 'rgba(79, 26, 0, 0.4)',
-                        primaryColor: '#000',
-                        textColor: '#004a14',
-                        zIndex: 1000,
-                    },
-                }} />
+            {isJoyrideActive && (
+                <Joyride
+                    steps={steps}
+                    continuous={true}
+                    disableBeacon={false}
+                    callback={handleJoyrideCallback}
+                />
+            )}
         </div>
     );
 };
