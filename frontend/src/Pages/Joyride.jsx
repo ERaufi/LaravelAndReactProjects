@@ -8,11 +8,11 @@ const JoyrideDemo = () => {
     const steps = [
         {
             target: '#notification',
-            content: 'This is Card 1!',
+            content: 'View Your Notifications from here',
         },
         {
-            target: '#card2',
-            content: 'This is Card 2!',
+            target: '#menu-toggle',
+            content: 'Show and hide the menu bar',
         },
         {
             target: '#card3',
