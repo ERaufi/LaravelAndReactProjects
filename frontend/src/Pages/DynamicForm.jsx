@@ -2,15 +2,24 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const ProductForm = () => {
-    const [productFields, setProductFields] = useState([
-        { name: '', quantity: '', buyingPrice: '', sellingPrice: '', description: '', image: null, weight: '' }
-    ]);
+export default function ProductForm() {
+    const fields =
+    {
+        name: '',
+        quantity: '',
+        buyingPrice: '',
+        sellingPrice: '',
+        description: '',
+        image: null,
+        weight: ''
+    };
+
+    const [productFields, setProductFields] = useState([fields]);
 
     const handleAddRow = () => {
         setProductFields([
             ...productFields,
-            { name: '', quantity: '', buyingPrice: '', sellingPrice: '', description: '', image: null, weight: '' }
+            fields
         ]);
     };
 
@@ -61,104 +70,110 @@ const ProductForm = () => {
 
     return (
         <div className="container mt-4">
-            <h3>Add Products</h3>
-            <form onSubmit={handleSubmit}>
-                {productFields.map((productField, index) => (
-                    <div className="row mb-3" key={index}>
-                        <div className="col-md-2">
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Name"
-                                name="name"
-                                value={productField.name}
-                                onChange={(event) => handleInputChange(index, event)}
-                                required
-                            />
-                        </div>
-                        <div className="col-md-1">
-                            <input
-                                type="number"
-                                className="form-control"
-                                placeholder="Qty"
-                                name="quantity"
-                                value={productField.quantity}
-                                onChange={(event) => handleInputChange(index, event)}
-                                required
-                            />
-                        </div>
-                        <div className="col-md-2">
-                            <input
-                                type="number"
-                                className="form-control"
-                                placeholder="Buying Price"
-                                name="buyingPrice"
-                                value={productField.buyingPrice}
-                                onChange={(event) => handleInputChange(index, event)}
-                                required
-                            />
-                        </div>
-                        <div className="col-md-2">
-                            <input
-                                type="number"
-                                className="form-control"
-                                placeholder="Selling Price"
-                                name="sellingPrice"
-                                value={productField.sellingPrice}
-                                onChange={(event) => handleInputChange(index, event)}
-                                required
-                            />
-                        </div>
-                        <div className="col-md-2">
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Description"
-                                name="description"
-                                value={productField.description}
-                                onChange={(event) => handleInputChange(index, event)}
-                            />
-                        </div>
-                        <div className="col-md-1">
-                            <input
-                                type="file"
-                                className="form-control"
-                                placeholder="Image"
-                                name="image"
-                                onChange={(event) => handleInputChange(index, event)}
-                            />
-                        </div>
-                        <div className="col-md-1">
-                            <input
-                                type="number"
-                                className="form-control"
-                                placeholder="Weight"
-                                name="weight"
-                                value={productField.weight}
-                                onChange={(event) => handleInputChange(index, event)}
-                            />
-                        </div>
-                        <div className="col-md-1">
-                            <button
-                                type="button"
-                                className="btn btn-danger"
-                                onClick={() => handleRemoveRow(index)}
-                                disabled={productFields.length === 1}
-                            >
-                                X
-                            </button>
-                        </div>
-                    </div>
-                ))}
-                <div className="mb-3">
-                    <button type="button" className="btn btn-primary" onClick={handleAddRow}>
-                        Add Product
-                    </button>
-                    <button type="submit" className="btn btn-success ml-2">Submit</button>
+            <div className="card">
+                <div className="card-header">
+                    <h3>Add Products</h3>
+
                 </div>
-            </form>
+                <div className="card-body">
+                    <div className="mb-3">
+                        <button type="button" className="btn btn-primary" onClick={handleAddRow}>
+                            Add Product
+                        </button>
+                    </div>
+                    <form onSubmit={handleSubmit}>
+                        {productFields.map((productField, index) => (
+                            <div className="row mb-3" key={index}>
+                                <div className="col-md-2">
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Name"
+                                        name="name"
+                                        value={productField.name}
+                                        onChange={(event) => handleInputChange(index, event)}
+                                        required
+                                    />
+                                </div>
+                                <div className="col-md-1">
+                                    <input
+                                        type="number"
+                                        className="form-control"
+                                        placeholder="Qty"
+                                        name="quantity"
+                                        value={productField.quantity}
+                                        onChange={(event) => handleInputChange(index, event)}
+                                        required
+                                    />
+                                </div>
+                                <div className="col-md-2">
+                                    <input
+                                        type="number"
+                                        className="form-control"
+                                        placeholder="Buying Price"
+                                        name="buyingPrice"
+                                        value={productField.buyingPrice}
+                                        onChange={(event) => handleInputChange(index, event)}
+                                        required
+                                    />
+                                </div>
+                                <div className="col-md-2">
+                                    <input
+                                        type="number"
+                                        className="form-control"
+                                        placeholder="Selling Price"
+                                        name="sellingPrice"
+                                        value={productField.sellingPrice}
+                                        onChange={(event) => handleInputChange(index, event)}
+                                        required
+                                    />
+                                </div>
+                                <div className="col-md-2">
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Description"
+                                        name="description"
+                                        value={productField.description}
+                                        onChange={(event) => handleInputChange(index, event)}
+                                    />
+                                </div>
+                                <div className="col-md-1">
+                                    <input
+                                        type="file"
+                                        className="form-control"
+                                        placeholder="Image"
+                                        name="image"
+                                        onChange={(event) => handleInputChange(index, event)}
+                                    />
+                                </div>
+                                <div className="col-md-1">
+                                    <input
+                                        type="number"
+                                        className="form-control"
+                                        placeholder="Weight"
+                                        name="weight"
+                                        value={productField.weight}
+                                        onChange={(event) => handleInputChange(index, event)}
+                                    />
+                                </div>
+                                <div className="col-md-1">
+                                    <button
+                                        type="button"
+                                        className="btn btn-danger"
+                                        onClick={() => handleRemoveRow(index)}
+                                        disabled={productFields.length === 1}
+                                    >
+                                        X
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                        <button type="submit" className="btn btn-success ml-2">Submit</button>
+                    </form>
+                </div>
+            </div>
+
         </div>
     );
 };
-
-export default ProductForm;
