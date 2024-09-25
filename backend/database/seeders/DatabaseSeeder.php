@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Products;
+use App\Models\ProductTransactions;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -19,10 +21,13 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        Products::factory()->count(10)->create(); // Create 10 products
 
-        $this->call([
-            CountriesSeeder::class,
-            CitiesSeeder::class,
-        ]);
+        ProductTransactions::factory()->count(200)->create(); // Create 10 transactions
+        // $this->call([
+        //     CountriesSeeder::class,
+        //     CitiesSeeder::class,
+
+        // ]);
     }
 }
