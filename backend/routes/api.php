@@ -23,4 +23,7 @@ Route::prefix('products')->controller(ProductsController::class)->group(function
 Route::prefix('charts')->group(function () {
     Route::get('bar-chart', [ProductTransactionsController::class, 'barChart']);
     Route::get('donut-chart', [ProductTransactionsController::class, 'donutChart']);
+    Route::get('line-chart', [ProductTransactionsController::class, 'lineChart']);
+    Route::get('pie-chart', [ProductTransactionsController::class, 'pieChart']);
+    Route::get('stackbar-chart', [ProductTransactionsController::class, 'stackBarChart']);
 });

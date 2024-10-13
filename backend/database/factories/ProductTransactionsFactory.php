@@ -24,7 +24,7 @@ class ProductTransactionsFactory extends Factory
             'quantity' => $this->faker->numberBetween(1, 100),
             'price' => $this->faker->numberBetween(100, 10000),
             'status' => $this->faker->randomElement(['pending', 'completed', 'canceled']),
-            'created_at' => now(),
+            'created_at' => $this->faker->dateTimeThisMonth(), // Random date in the current month
             'updated_at' => now(),
         ];
     }

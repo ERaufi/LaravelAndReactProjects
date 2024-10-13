@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        Products::factory()->count(10)->create(); // Create 10 products
+        // Products::factory()->count(10)->create(); // Create 10 products
 
         ProductTransactions::factory()->count(200)->create(); // Create 10 transactions
         // $this->call([
