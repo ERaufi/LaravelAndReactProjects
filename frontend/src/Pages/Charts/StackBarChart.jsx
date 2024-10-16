@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Chart } from 'chart.js';
+import Chart from 'chart.js/auto';
 
 const StackedBarChart = () => {
     const [chartData, setChartData] = useState({
         labels: [],
-        data: {
-            buy: [],
-            sell: [],
-            return: [],
-        },
+        data: [],
     });
 
     const fetchData = async () => {
@@ -31,17 +27,17 @@ const StackedBarChart = () => {
                 datasets: [
                     {
                         label: 'Buy',
-                        data: chartData.data.buy,
+                        data: chartData.data.map(item => item.buy),
                         backgroundColor: 'rgba(75, 192, 192, 0.6)',
                     },
                     {
                         label: 'Sell',
-                        data: chartData.data.sell,
+                        data: chartData.data.map(item => item.sell),
                         backgroundColor: 'rgba(255, 99, 132, 0.6)',
                     },
                     {
                         label: 'Return',
-                        data: chartData.data.return,
+                        data: chartData.data.map(item => item.return),
                         backgroundColor: 'rgba(54, 162, 235, 0.6)',
                     },
                 ],
@@ -64,13 +60,12 @@ const StackedBarChart = () => {
     }, [chartData]);
 
     return (
-        <div className="flex items-center justify-center h-screen"> {/* Center the chart on the screen */}
-            <div className="card"> {/* Create a card for styling */}
-                <div className="card-header"> {/* Header of the card */}
-                    <h3>Line Chart</h3> {/* Title of the chart */}
+        <div className="flex items-center justify-center h-screen">
+            <div className="card">
+                <div className="card-header">
+                    <h3>Stacked Bar Chart</h3>
                 </div>
-                <div className="card-body"> {/* Body of the card */}
-                    {/* Render the canvas if there are labels, otherwise show loading message */}
+                <div className="card-body">
                     <canvas id="stackedBarChart"></canvas>
                 </div>
             </div>

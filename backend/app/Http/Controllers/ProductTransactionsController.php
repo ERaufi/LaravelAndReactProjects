@@ -43,14 +43,11 @@ class ProductTransactionsController extends Controller
 
     public function lineChart()
     {
-        // Query the ProductTransactions model to select the date, transaction type, and the total quantity for each type
-        $transactions = ProductTransactions::selectRaw('DATE(created_at) as date, transaction_type, SUM(quantity) as total_quantity')
-            // Group the results by date and transaction type
+        $transactions = ProductTransactions::query()
+            ->selectRaw('DATE(created_at) as date, transaction_type, SUM(quantity) as total_quantity')
             ->groupBy('date', 'transaction_type')
-            // Execute the query and get the results
             ->get();
 
-        // Return the results as a JSON response
         return response()->json($transactions);
     }
 
@@ -65,32 +62,20 @@ class ProductTransactionsController extends Controller
 
     public function stackBarChart()
     {
-        $transactions = ProductTransactions::select('transaction_type', 'quantity', 'price', 'created_at')
-            ->get()
-            ->groupBy(function ($item) {
-                return \Carbon\Carbon::parse($item->created_at)->format('Y-m-d'); // Group by date
-            });
+        $transactions = ProductTransactions::query()
+            ->selectRaw('DATE(created_at) as date, transaction_type, SUM(quantity) as total_quantity')
+            ->groupBy('date', 'transaction_type')
+            ->get();
 
-        // Prepare data for stacked bar chart
-        $labels = [];
-        $buyData = [];
-        $sellData = [];
-        $returnData = [];
-
-        foreach ($transactions as $date => $items) {
-            $labels[] = $date;
-            $buyData[] = $items->where('transaction_type', 'buy')->sum('quantity');
-            $sellData[] = $items->where('transaction_type', 'sell')->sum('quantity');
-            $returnData[] = $items->where('transaction_type', 'return')->sum('quantity');
-        }
+        $data = $transactions->groupBy('date')->map(fn($items) => [
+            'buy' => $items->where('transaction_type', 'buy')->sum('total_quantity'),
+            'sell' => $items->where('transaction_type', 'sell')->sum('total_quantity'),
+            'return' => $items->where('transaction_type', 'return')->sum('total_quantity'),
+        ]);
 
         return response()->json([
-            'labels' => $labels,
-            'data' => [
-                'buy' => $buyData,
-                'sell' => $sellData,
-                'return' => $returnData,
-            ],
+            'labels' => $data->keys(),
+            'data' => $data->values(),
         ]);
     }
 }
