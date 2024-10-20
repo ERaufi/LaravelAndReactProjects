@@ -1,6 +1,5 @@
 import logo from './logo.svg';
 import './App.css';
-import DynamicSelect from '../src/Pages/ReactSelect';
 import Sidebar from './Layout/Sidebar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import JoyrideDemo from './Pages/Joyride';
@@ -10,6 +9,9 @@ import DonutChart from './Pages/Charts/DonutChart';
 import LineChart from './Pages/Charts/LineChart';
 import PieChart from './Pages/Charts/PieChart';
 import StackedBarChart from './Pages/Charts/StackBarChart';
+import CountryCitySelect from './Pages/SelectOptions/CountryCitySelect';
+import DynamicSelect from './Pages/SelectOptions/ReactSelect';
+import MultiCountrySelect from './Pages/SelectOptions/MultiSelect';
 
 
 function App() {
@@ -18,7 +20,6 @@ function App() {
       <Router>
         <Sidebar />
         <Routes>
-          <Route path="/react-select" element={<DynamicSelect />} />
           <Route path="/intro-js" element={<JoyrideDemo />} />
           <Route path="/dynamic-form" element={<DynamicForm />} />
           <Route path="/bar-chart" element={<BarChart />} />
@@ -26,6 +27,9 @@ function App() {
           <Route path="/line-chart" element={<LineChart />} />
           <Route path="/pie-chart" element={<PieChart />} />
           <Route path="/stackbar-chart" element={<StackedBarChart />} />
+          <Route path="/country-cities" element={<CountryCitySelect />} />
+          <Route path="/react-select" element={<DynamicSelect />} />
+          <Route path="/multi-select" element={<MultiCountrySelect />} />
         </Routes>
       </Router>
     </div>

@@ -12,6 +12,8 @@ Route::get('/user', function (Request $request) {
 
 Route::prefix('countries')->controller(CountriesController::class)->group(function () {
     Route::get('get', 'get');
+    Route::get('/all', [CountriesController::class, 'getCountries']);
+    Route::get('/cities/{countryCode}', [CountriesController::class, 'getCities']);
 });
 
 

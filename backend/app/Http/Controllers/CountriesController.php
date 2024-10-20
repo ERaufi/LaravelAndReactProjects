@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cities;
 use App\Models\Countries;
 use Illuminate\Http\Request;
 
@@ -20,5 +21,18 @@ class CountriesController extends Controller
             'options' => $options->items(),
             'hasMore' => $options->hasMorePages()
         ]);
+    }
+
+
+    public function getCountries()
+    {
+        $countries = Countries::orderBy('order_number')->get();
+        return response()->json($countries);
+    }
+
+    public function getCities($countryCode)
+    {
+        $cities = Cities::where('country_code', $countryCode)->get();
+        return response()->json($cities);
     }
 }
