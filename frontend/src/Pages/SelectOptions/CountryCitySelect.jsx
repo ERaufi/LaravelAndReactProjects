@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import { API_BASE_URL } from '../../globals';
 const CountryCitySelect = () => {
     const [countries, setCountries] = useState([]);
     const [cities, setCities] = useState([]);
@@ -8,7 +8,7 @@ const CountryCitySelect = () => {
 
     // Fetch countries when the component loads
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/api/countries/all')
+        axios.get(API_BASE_URL + '/countries/all')
             .then(response => {
                 setCountries(response.data);
             })
@@ -20,7 +20,7 @@ const CountryCitySelect = () => {
     // Fetch cities when a country is selected
     useEffect(() => {
         if (selectedCountry) {
-            axios.get(`http://127.0.0.1:8000/api/countries/cities/${selectedCountry}`)
+            axios.get(`${API_BASE_URL}/countries/cities/${selectedCountry}`)
                 .then(response => {
                     setCities(response.data);
                 })

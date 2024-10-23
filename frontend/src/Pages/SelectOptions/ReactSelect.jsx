@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import axios from 'axios';
-
+import { API_BASE_URL } from '../../globals';
 
 // Official Link https://react-select.com/home#getting-started
 export default function DynamicSelect() {
@@ -15,7 +15,7 @@ export default function DynamicSelect() {
     const fetchData = async (inputValue, page) => {
         setLoading(true);
         try {
-            const response = await axios.get('http://127.0.0.1:8000/api/countries/get', {
+            const response = await axios.get(API_BASE_URL + '/countries/get', {
                 params: {
                     q: inputValue,
                     page: page

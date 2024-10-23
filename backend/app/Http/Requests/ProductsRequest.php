@@ -22,26 +22,23 @@ class ProductsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'products.*.name' => 'required|string|max:255',
-            'products.*.quantity' => 'required|integer',
-            'products.*.buyingPrice' => 'required|integer',
-            'products.*.sellingPrice' => 'required|integer',
-            'products.*.description' => 'nullable|string',
-            'products.*.image' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
-            'products.*.weight' => 'nullable|integer',
+            'name' => 'required|string|max:255',
+            'quantity' => 'required|integer',
+            'buyingPrice' => 'required|integer',
+            'sellingPrice' => 'required|integer',
+            'description' => 'nullable|string',
+            'weight' => 'nullable|integer',
+            'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ];
     }
 
     public function messages()
     {
         return [
-            'products.*.name.required' => 'The product name is required.',
-            'products.*.quantity.required' => 'The product quantity is required.',
-            'products.*.buyingPrice.required' => 'The buying price is required.',
-            'products.*.sellingPrice.required' => 'The selling price is required.',
-            'products.*.image.image' => 'The uploaded file must be an image.',
-            'products.*.image.mimes' => 'The image must be a file of type: jpg, png, jpeg, gif.',
-            'products.*.image.max' => 'The image may not be greater than 2MB.',
+            'name.required' => 'The product name is required.',
+            'quantity.required' => 'The product quantity is required.',
+            'buyingPrice.required' => 'The buying price is required.',
+            'sellingPrice.required' => 'The selling price is required.',
         ];
     }
 }

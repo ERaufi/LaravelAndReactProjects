@@ -12,6 +12,8 @@ import StackedBarChart from './Pages/Charts/StackBarChart';
 import CountryCitySelect from './Pages/SelectOptions/CountryCitySelect';
 import DynamicSelect from './Pages/SelectOptions/ReactSelect';
 import MultiCountrySelect from './Pages/SelectOptions/MultiSelect';
+import AddProduct from './Pages/CRUD/AddProduct';
+import ProductsTable from './Pages/CRUD/ProductsTable';
 
 
 function App() {
@@ -30,6 +32,9 @@ function App() {
           <Route path="/country-cities" element={<CountryCitySelect />} />
           <Route path="/react-select" element={<DynamicSelect />} />
           <Route path="/multi-select" element={<MultiCountrySelect />} />
+          <Route path="/add-products" element={<AddProduct />} />
+          <Route path="/products-table" element={<ProductsTable />} />
+
         </Routes>
       </Router>
     </div>

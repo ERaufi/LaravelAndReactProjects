@@ -16,7 +16,30 @@ class ProductsController extends Controller
         return response()->json($products);
     }
 
-    public function store(ProductsRequest $request)
+    public function getWithPagination(Request $request)
+    {
+        $query = Products::query();
+
+        // Filtering
+        if ($request->has('search') && $request->search) {
+            $search = $request->search;
+            $query->where('name', 'like', "%{$search}%")
+                ->orWhere('description', 'like', "%{$search}%");
+        }
+
+        // Sorting
+        $sortField = $request->get('sort_field', 'name');
+        $sortOrder = $request->get('sort_order', 'asc');
+        $query->orderBy($sortField, $sortOrder);
+
+        // Pagination
+        $perPage = $request->get('per_page', 10);
+        $products = $query->paginate($perPage);
+
+        return response()->json($products);
+    }
+
+    public function addMany(Request $request)
     {
         foreach ($request['products'] as $productData) {
             $product = new Products();
@@ -37,5 +60,23 @@ class ProductsController extends Controller
         }
 
         return response()->json(['message' => 'Products added successfully']);
+    }
+
+    public function store(ProductsRequest $request)
+    {
+        $product = new Products();
+        $product->name = $request->name;
+        $product->quantity = $request->quantity;
+        $product->buyingPrice = $request->buyingPrice;
+        $product->sellingPrice = $request->sellingPrice;
+        $product->description = $request->description;
+        $product->weight = $request->weight;
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images/products', 'public');
+            $product->image_path = $imagePath; // Save the image path to the database
+        }
+
+        $product->save();
     }
 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react'; // Import necessary React hooks
 import Chart from 'chart.js/auto'; // Import Chart.js for rendering charts
 import axios from 'axios'; // Import axios for making HTTP requests
+import { API_BASE_URL } from '../../globals';
 
 // Define the BarChart component
 const BarChart = () => {
@@ -11,7 +12,7 @@ const BarChart = () => {
     const fetchTransactionData = async () => {
         try {
             // Make a GET request to the API endpoint to fetch transaction data
-            const response = await axios.get('http://127.0.0.1:8000/api/charts/bar-chart');
+            const response = await axios.get(API_BASE_URL + '/charts/bar-chart');
             // Create a chart with the fetched data
             createChart(response.data);
         } catch (error) {

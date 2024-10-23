@@ -1,6 +1,7 @@
 // src/components/ProductForm.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../globals';
 
 export default function ProductForm() {
     const fields =
@@ -57,7 +58,7 @@ export default function ProductForm() {
         });
 
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/products/store', formData, {
+            const response = await axios.post(API_BASE_URL + '/products/store', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data', // Set the correct content type
                 },

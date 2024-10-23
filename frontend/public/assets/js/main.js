@@ -32,7 +32,7 @@ setTimeout(() => {
 
   menuToggleButton.addEventListener("click", () => {
     sidebarNavWrapper.classList.toggle("active");
-    overlay.classList.add("active");
+    // overlay.classList.add("active");
     mainWrapper.classList.toggle("active");
 
     if (document.body.clientWidth > 1200) {
@@ -50,9 +50,9 @@ setTimeout(() => {
       }
     }
   });
-  overlay.addEventListener("click", () => {
-    sidebarNavWrapper.classList.remove("active");
-    overlay.classList.remove("active");
-    mainWrapper.classList.remove("active");
-  });
+  // overlay.addEventListener("click", () => {
+  //   sidebarNavWrapper.classList.remove("active");
+  //   overlay.classList.remove("active");
+  //   mainWrapper.classList.remove("active");
+  // });
 }, 500);

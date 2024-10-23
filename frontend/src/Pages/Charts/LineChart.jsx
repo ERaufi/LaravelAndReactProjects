@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'; // Import React and necessary hooks
 import Chart from 'chart.js/auto'; // Automatically imports all necessary components from Chart.js
 import axios from 'axios'; // Import axios for making HTTP requests
+import { API_BASE_URL } from '../../globals';
 
 const LineChart = () => {
     // Step 1: Create the component
@@ -14,7 +15,7 @@ const LineChart = () => {
         const fetchData = async () => { // Define an asynchronous function to fetch data
             try {
                 // Make a GET request to the API to retrieve line chart data
-                const { data } = await axios.get('http://127.0.0.1:8000/api/charts/line-chart');
+                const { data } = await axios.get(API_BASE_URL + '/charts/line-chart');
                 // Initialize an object to hold totals for each date
                 const totals = {};
 

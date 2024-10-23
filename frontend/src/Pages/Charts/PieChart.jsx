@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';  // Import React and hooks for managing state and lifecycle
 import Chart from 'chart.js/auto';  // Import Chart.js for creating charts, automatically includes necessary components
 import axios from 'axios';  // Import axios for making HTTP requests
+import { API_BASE_URL } from '../../globals';
 
 const PieChart = () => {  // Define a functional component named PieChart
     const [data, setData] = useState({ labels: [], values: [] });  // Initialize state to store chart data with labels and values
@@ -9,7 +10,7 @@ const PieChart = () => {  // Define a functional component named PieChart
     useEffect(() => {  // Use useEffect hook to perform side effects after component mounts
         const fetchData = async () => {  // Define an asynchronous function to fetch data
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/charts/pie-chart');  // Fetch data from the API endpoint using Axios
+                const response = await axios.get(API_BASE_URL + '/charts/pie-chart');  // Fetch data from the API endpoint using Axios
                 const transactions = response.data;  // Get the data from the response
 
                 // Map over transactions to extract labels and values for the pie chart

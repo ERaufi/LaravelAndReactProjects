@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
+import { API_BASE_URL } from '../../globals';
 
 const StackedBarChart = () => {
     const [chartData, setChartData] = useState({
@@ -8,7 +9,7 @@ const StackedBarChart = () => {
     });
 
     const fetchData = async () => {
-        const response = await fetch('http://127.0.0.1:8000/api/charts/stackbar-chart');
+        const response = await fetch(API_BASE_URL + '/charts/stackbar-chart');
         const data = await response.json();
         setChartData(data);
     };

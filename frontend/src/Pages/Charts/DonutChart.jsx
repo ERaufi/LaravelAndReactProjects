@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto'; // Import Chart.js
 import axios from 'axios'; // Import axios for making HTTP requests
+import { API_BASE_URL } from '../../globals';
 
 const DonutChart = () => {
     const chartRef = useRef(null); // Ref to access the canvas element for the chart
@@ -9,7 +10,7 @@ const DonutChart = () => {
     const fetchTransactionData = async () => {
         try {
             // Make a GET request to the API endpoint to fetch transaction data
-            const response = await axios.get('http://127.0.0.1:8000/api/charts/donut-chart');
+            const response = await axios.get(API_BASE_URL + '/charts/donut-chart');
             createChart(response.data); // Create a chart with the fetched data
         } catch (error) {
             console.error('Error fetching transaction data:', error); // Log any errors

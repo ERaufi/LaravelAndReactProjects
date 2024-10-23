@@ -19,7 +19,9 @@ Route::prefix('countries')->controller(CountriesController::class)->group(functi
 
 Route::prefix('products')->controller(ProductsController::class)->group(function () {
     Route::get('index', 'index');
-    Route::post('store', 'store');
+    Route::get('get-with-pagination', 'getWithPagination');
+    Route::post('store', 'addMany');
+    Route::post('add', 'store');
 });
 
 Route::prefix('charts')->group(function () {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Multiselect from 'multiselect-react-dropdown';
 import axios from 'axios';
+import { API_BASE_URL } from '../../globals';
 
 const MultiCountrySelect = () => {
     const [countries, setCountries] = useState([]);
@@ -8,7 +9,7 @@ const MultiCountrySelect = () => {
 
     // Fetch countries when the component loads
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/api/countries/all')
+        axios.get(API_BASE_URL + '/countries/all')
             .then(response => {
                 setCountries(response.data);
             })
